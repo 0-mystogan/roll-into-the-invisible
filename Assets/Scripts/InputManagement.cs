@@ -1,37 +1,23 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+using NaughtyAttributes;
 using UnityEngine;
 
 public class InputManagement : MonoBehaviour
 {
 #pragma warning disable 0649
     [SerializeField]
-    private KeyCode Forward;
+    [InputAxis]
+    private string Horizontal;
+
     [SerializeField]
-    private KeyCode Back;
-    [SerializeField]
-    private KeyCode Right;
-    [SerializeField]
-    private KeyCode Left;
+    [InputAxis]
+    private string Vertical;
 #pragma warning restore 0649
 
-    public event Action OnForwardKeyPressed;
-    public event Action OnBackKeyPressed;
-    public event Action OnRightKeyPressed;
-    public event Action OnLeftKeyPressed;
+    public event Action<float, float> OnAxisInput;
+   
     void FixedUpdate()
     {
-        if (Input.GetKey(Forward))
-            OnForwardKeyPressed();
-
-        if (Input.GetKey(Back))
-            OnBackKeyPressed();
-
-        if (Input.GetKey(Left))
-            OnLeftKeyPressed();
-
-        if (Input.GetKey(Right))
-            OnRightKeyPressed();
+        OnAxisInput?.Invoke(Input.GetAxisRaw(Horizontal), Input.GetAxisRaw(Vertical));
     }
 }

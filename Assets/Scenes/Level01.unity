@@ -12479,10 +12479,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5693322e80e11ca429d4906661ac19d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Forward: 119
-  Back: 115
-  Right: 100
-  Left: 97
+  Horizontal: Horizontal
+  Vertical: Vertical
 --- !u!1001 &985683765
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18141,6 +18139,11 @@ PrefabInstance:
       propertyPath: InputManagement
       value: 
       objectReference: {fileID: 978985033}
+    - target: {fileID: 1425986636360741420, guid: a996503d11654804d8250d8009584115,
+        type: 3}
+      propertyPath: Speed
+      value: 9.9
+      objectReference: {fileID: 0}
     - target: {fileID: 1425986636360741422, guid: a996503d11654804d8250d8009584115,
         type: 3}
       propertyPath: m_LocalPosition.x

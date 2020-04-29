@@ -8,7 +8,7 @@ public class ShowGem : MonoBehaviour
     {
         if (player.CompareTag("Player"))
         {
-            if(this.GetComponentInChildren<Renderer>().enabled == false)
+            if(this.GetComponentInChildren<Renderer>() != null && this.GetComponentInChildren<Renderer>().enabled == false)
                 this.GetComponentInChildren<Renderer>().enabled = true;
         }
     }

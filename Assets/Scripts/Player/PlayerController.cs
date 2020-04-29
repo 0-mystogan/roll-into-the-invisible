@@ -19,20 +19,23 @@ public class PlayerController : MonoBehaviour
     #region Initialization
     private void Start()
     {
-        InputManagement.OnForwardKeyPressed += InputManagement_OnForwardKeyPressed;
-        InputManagement.OnBackKeyPressed += InputManagement_OnBackKeyPressed;
-        InputManagement.OnRightKeyPressed += InputManagement_OnRightKeyPressed;
-        InputManagement.OnLeftKeyPressed += InputManagement_OnLeftKeyPressed;
+        InputManagement.OnAxisInput += InputManagement_OnAxisInput;
+
     }
 
     private void OnDestroy()
     {
-        InputManagement.OnForwardKeyPressed -= InputManagement_OnForwardKeyPressed;
-        InputManagement.OnBackKeyPressed -= InputManagement_OnBackKeyPressed;
-        InputManagement.OnRightKeyPressed -= InputManagement_OnRightKeyPressed;
-        InputManagement.OnLeftKeyPressed -= InputManagement_OnLeftKeyPressed;
+        InputManagement.OnAxisInput -= InputManagement_OnAxisInput;
     }
+
+
     #endregion
+
+    private void InputManagement_OnAxisInput(float horizontal, float veritcal)
+    {
+
+        this.GetComponent<Rigidbody>().AddForce(horizontal * Speed, 0, veritcal* Speed, ForceMode.Acceleration);
+    }
 
     private void FixedUpdate()
     {
@@ -40,25 +43,6 @@ public class PlayerController : MonoBehaviour
         {
             FindObjectOfType<GameManager>().GameOver();
         }
-    }
-    private void InputManagement_OnLeftKeyPressed()
-    {
-        this.GetComponent<Rigidbody>().AddForce(Vector3.left * Speed, ForceMode.Acceleration);
-    }
-
-    private void InputManagement_OnRightKeyPressed()
-    {
-        this.GetComponent<Rigidbody>().AddForce(Vector3.right * Speed, ForceMode.Acceleration);
-    }
-
-    private void InputManagement_OnBackKeyPressed()
-    {
-        this.GetComponent<Rigidbody>().AddForce(Vector3.back * Speed, ForceMode.Acceleration);
-    }
-
-    private void InputManagement_OnForwardKeyPressed()
-    {
-        this.GetComponent<Rigidbody>().AddForce(Vector3.forward * Speed, ForceMode.Acceleration);
     }
 
 }
