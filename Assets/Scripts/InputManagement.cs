@@ -12,9 +12,14 @@ public class InputManagement : MonoBehaviour
     [SerializeField]
     [InputAxis]
     private string Vertical;
-#pragma warning restore 0649
 
-    public event Action<float, float> OnAxisInput;
+#pragma warning restore 0649
+    /// <summary>
+    /// 1.float horizontal
+    /// 2.float vertial
+    /// </summary>
+
+    public event Action<float,  float> OnAxisInput;
    
     void FixedUpdate()
     {

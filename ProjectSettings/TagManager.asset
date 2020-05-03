@@ -6,6 +6,7 @@ TagManager:
   tags:
   - RegularStep
   - BlueGem
+  - Ground
   layers:
   - Default
   - TransparentFX
