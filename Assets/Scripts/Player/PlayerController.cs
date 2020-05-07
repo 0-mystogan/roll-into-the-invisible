@@ -18,18 +18,17 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     [ReadOnly]
-    private bool IsGrounded;
+    private bool isGrounded;
 #pragma warning restore 0649
     private Rigidbody rb;
-    public JumpHandler Jump;
     #region Initialization
     private void Start()
     {
+        isGrounded = true;
         rb = this.GetComponent<Rigidbody>();
         InputManagement.OnAxisInput += InputManagement_OnAxisInput;
+        InputManagement.OnJumpInput += InputManagement_OnJumpInput;
     }
-
-  
 
     private void OnDestroy()
     {
@@ -41,26 +40,26 @@ public class PlayerController : MonoBehaviour
   
     private void InputManagement_OnAxisInput(float horizontal, float veritcal)
     {
+        if(isGrounded)
+        rb.AddForce(horizontal * Speed, 0, veritcal * Speed, ForceMode.Acceleration);
+        else
+            rb.AddForce(horizontal * (Speed - 5), 0, veritcal * (Speed - 5), ForceMode.Acceleration);
 
-        this.GetComponent<Rigidbody>().AddForce(horizontal * Speed, 0, veritcal* Speed, ForceMode.Acceleration);
+    }
+
+    private void InputManagement_OnJumpInput(float jump)
+    {
+        if ( jump > 0 && isGrounded)
+        {
+            rb.AddForce(new Vector3(0, 5, 0), ForceMode.Impulse);
+            isGrounded = false;
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            IsGrounded = true;
-            Debug.Log("On the goround");
-        }
-    }
-
-    private void OnCollisionExit(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            IsGrounded = false;
-            Debug.Log("NOT On the goround");
-        }
+        if(collision.gameObject.CompareTag("Ground"))
+            isGrounded = true;
     }
 
     private void FixedUpdate()
@@ -70,8 +69,6 @@ public class PlayerController : MonoBehaviour
             FindObjectOfType<GameManager>().GameOver();
         }
 
-        if(IsGrounded)
-            Jump.Jump();
     }
 
 }

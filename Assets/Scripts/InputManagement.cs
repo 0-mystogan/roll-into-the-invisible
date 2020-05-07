@@ -13,6 +13,10 @@ public class InputManagement : MonoBehaviour
     [InputAxis]
     private string Vertical;
 
+    [SerializeField]
+    [InputAxis]
+    private string Jump;
+
 #pragma warning restore 0649
     /// <summary>
     /// 1.float horizontal
@@ -20,9 +24,11 @@ public class InputManagement : MonoBehaviour
     /// </summary>
 
     public event Action<float,  float> OnAxisInput;
+    public event Action<float> OnJumpInput;
    
     void FixedUpdate()
     {
         OnAxisInput?.Invoke(Input.GetAxisRaw(Horizontal), Input.GetAxisRaw(Vertical));
+        OnJumpInput?.Invoke(Input.GetAxisRaw(Jump));
     }
 }

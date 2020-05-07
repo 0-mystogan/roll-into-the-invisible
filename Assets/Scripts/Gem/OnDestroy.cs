@@ -15,7 +15,7 @@ public class OnDestroy : MonoBehaviour
         if (player.CompareTag("Player"))
         {
             Constants.ScoreCounter++;
-            Score.text = Constants.ScoreCounter.ToString();
+            Score.SetText(Constants.ScoreCounter.ToString());
             if (this.gameObject != null)
                 Destroy(this.gameObject, delayDestroy);
             
