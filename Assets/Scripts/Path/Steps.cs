@@ -1,17 +1,22 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 
 public class Steps : MonoBehaviour
 {
-//#pragma warning disable 0649
-//    [SerializeField]
-//    private GameObject step;
-//#pragma warning restore 0649
+#pragma warning disable 0649
 
-    
+    [SerializeField]
+    private Material Original;
+#pragma warning restore 0649
+
+
+
     private void OnCollisionEnter(Collision collision)
     {
-        if (this.GetComponent<Renderer>().enabled == false)
-            this.GetComponent<Renderer>().enabled = true;
+            this.GetComponent<MeshRenderer>().enabled = true;
+            this.GetComponent<MeshRenderer>().material = Original;
+            Constants.IndexOfObject =  transform.GetSiblingIndex();
     }
 
 }

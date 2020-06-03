@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
 
     void Restart()
     {
+        Constants.IndexOfObject = 0;
         Constants.ScoreCounter = 0;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
