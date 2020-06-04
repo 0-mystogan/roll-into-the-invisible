@@ -26,7 +26,7 @@ public class OutlineNextStep : MonoBehaviour
 
     private void ShowSilhouette()
     {
-        if((Constants.IndexOfObject > 0 && Constants.IndexOfObject < Renderer.Count) && Renderer[Constants.IndexOfObject].enabled)
+        if((Constants.IndexOfObject >= 0 && Constants.IndexOfObject < Renderer.Count) && Renderer[Constants.IndexOfObject].enabled)
         {
             Renderer[Constants.IndexOfObject + 1].enabled = true;
             Renderer[Constants.IndexOfObject + 1].material = Silhouette;
